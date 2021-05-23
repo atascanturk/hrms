@@ -1,4 +1,4 @@
-package kodlamaio.hrms.core.utilities.consts;
+package kodlamaio.hrms.business.consts;
 
 public class Messages {
 	
