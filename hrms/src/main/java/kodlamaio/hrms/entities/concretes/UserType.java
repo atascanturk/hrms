@@ -8,25 +8,25 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="job_titles")
-public class Job {
-	
+@Table(name="user_types")
+public class UserType {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="title")
-	private String jobName;
-	
-	public Job() {
-		
+	@Column(name="user_type")
+	private String userType;
+
+	public UserType() {
+		super();
 	}
 
-	public Job(int id, String jobName) {
+	public UserType(int id, String userType) {
 		super();
 		this.id = id;
-		this.jobName = jobName;
+		this.userType = userType;
 	}
 
 	public int getId() {
@@ -37,13 +37,11 @@ public class Job {
 		this.id = id;
 	}
 
-	public String getJobName() {
-		return jobName;
+	public String getUserType() {
+		return userType;
 	}
 
-	public void setJobName(String jobName) {
-		this.jobName = jobName;
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
-	
-
 }
