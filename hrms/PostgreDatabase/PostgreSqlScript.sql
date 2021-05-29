@@ -13,13 +13,20 @@ CREATE TABLE public.admin_users
     PRIMARY KEY (id)
 );
 
+CREATE TABLE public.cities
+(
+    id integer NOT NULL,
+    name character varying(30) NOT NULL,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE public.employees
 (
     id integer NOT NULL,
-    first_name character varying(25) NOT NULL,
-    last_name character varying(25) NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(30) NOT NULL,
     identity_number character varying(11) NOT NULL,
-    date_of_birth "char" NOT NULL,
+    date_of_birth date NOT NULL,
     user_type_id integer NOT NULL,
     user_id integer NOT NULL,
     PRIMARY KEY (id)
@@ -40,6 +47,14 @@ CREATE TABLE public.job_titles
 (
     id integer NOT NULL,
     title character varying(50) NOT NULL,
+    city_id integer,
+    min_salary integer,
+    max_salary integer,
+    open_position_count integer,
+    created_date date,
+    application_deadline date,
+    is_active boolean,
+    employer_id integer,
     PRIMARY KEY (id)
 );
 
@@ -90,20 +105,20 @@ ALTER TABLE public.admin_users
     NOT VALID;
 
 
-ALTER TABLE public.employees
-    ADD FOREIGN KEY (user_id)
+ALTER TABLE public.admin_users
+    ADD FOREIGN KEY (id)
     REFERENCES public.users (id)
-    NOT VALID;
-
-
-ALTER TABLE public.employees
-    ADD FOREIGN KEY (user_type_id)
-    REFERENCES public.user_types (id)
     NOT VALID;
 
 
 ALTER TABLE public.employers
     ADD FOREIGN KEY (user_id)
+    REFERENCES public.users (id)
+    NOT VALID;
+
+
+ALTER TABLE public.employers
+    ADD FOREIGN KEY (id)
     REFERENCES public.users (id)
     NOT VALID;
 
@@ -114,13 +129,39 @@ ALTER TABLE public.user_activations
     NOT VALID;
 
 
+ALTER TABLE public.employees
+    ADD FOREIGN KEY (user_id)
+    REFERENCES public.users (id)
+    NOT VALID;
+
+
 ALTER TABLE public.user_activations_by_admin_users
     ADD FOREIGN KEY (confirmed_employee_id)
     REFERENCES public.employees (id)
     NOT VALID;
 
-INSERT INTO public.job_titles (id,title) VALUES (1,' Software Developer')
 
-INSERT INTO public.job_titles (id,title) VALUES (2,' Software Architect')
+ALTER TABLE public.employees
+    ADD FOREIGN KEY (user_type_id)
+    REFERENCES public.user_types (id)
+    NOT VALID;
+
+
+ALTER TABLE public.job_titles
+    ADD FOREIGN KEY (city_id)
+    REFERENCES public.cities (id)
+    NOT VALID;
+
+
+ALTER TABLE public.job_titles
+    ADD FOREIGN KEY (employer_id)
+    REFERENCES public.employers (id)
+    NOT VALID;
+
+
+ALTER TABLE public.employers
+    ADD FOREIGN KEY (user_type_id)
+    REFERENCES public.user_types (id)
+    NOT VALID;
 
 END;

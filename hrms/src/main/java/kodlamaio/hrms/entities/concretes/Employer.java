@@ -4,14 +4,18 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="employers")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","job_titles"})
 public class Employer extends User {
 
 	@Id
@@ -34,7 +38,7 @@ public class Employer extends User {
 	@Column(name="phone_number")
 	private String phoneNumber;
 	
-	@OneToMany(mappedBy = "category")
+	@OneToMany(mappedBy = "employer")
 	private List<Job> jobs;
 
 	public Employer() {

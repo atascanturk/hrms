@@ -11,8 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="job_titles")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","employer","city"})
 public class Job {
 	
 	@Id
@@ -26,8 +29,8 @@ public class Job {
 	@Column(name="title")
 	private String jobName;
 	
-	@Column(name="city")
-	private String city;
+	//@Column(name="city_id")
+	//private int city;
 	
 	@Column(name="min_salary")
 	private  int minSalary;
@@ -50,24 +53,28 @@ public class Job {
 	@ManyToOne()
 	@JoinColumn(name="employer_id")
 	private Employer employer;
+	
+	@ManyToOne()
+	@JoinColumn(name="city_id")
+	private City city;
 
 	public Job() {
 		super();
 	}
 
-	public Job(int id, String jobName, String city, int minSalary, int maxSalary, int openPositionCount,
-			LocalDate createdDate	,LocalDate applicationDeadline,boolean isActive,Employer employer) {
+	public Job(int id, String jobName, int minSalary, int maxSalary, int openPositionCount, LocalDate createdDate,
+			LocalDate applicationDeadline, boolean isActive, Employer employer, City city) {
 		super();
-		this.id = id;		
+		this.id = id;
 		this.jobName = jobName;
-		this.city = city;
 		this.minSalary = minSalary;
 		this.maxSalary = maxSalary;
 		this.openPositionCount = openPositionCount;
-		this.createdDate=createdDate;
+		this.createdDate = createdDate;
 		this.applicationDeadline = applicationDeadline;
-		this.isActive=isActive;
-		this.employer=employer;
+		this.isActive = isActive;
+		this.employer = employer;
+		this.city = city;
 	}
 
 	public int getId() {
@@ -84,14 +91,6 @@ public class Job {
 
 	public void setJobName(String jobName) {
 		this.jobName = jobName;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
 	}
 
 	public int getMinSalary() {
@@ -149,8 +148,13 @@ public class Job {
 	public void setEmployer(Employer employer) {
 		this.employer = employer;
 	}
-	
 
-	
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
+	}
 
 }

@@ -10,7 +10,7 @@ public interface JobDao extends JpaRepository<Job,Integer>{
 
  List<Job> getByIsActive(Boolean isActive);
  
- List<Job> getByEmployer_EmployerId(int employerId);
+ List<Job> getByEmployer_Id(int employerId);
  
  
  

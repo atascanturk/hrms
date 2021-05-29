@@ -64,7 +64,7 @@ public class JobManager implements JobService {
 	@Override
 	public DataResult<List<ActiveJobDto>> getByEmployer_EmployerId(int employerId) {
 		
-		List<Job> jobs =	this.jobDao.getByIsActive(true);
+		List<Job> jobs =	this.jobDao.getByEmployer_Id(employerId);
 		List<ActiveJobDto> activeJobs = new ArrayList<ActiveJobDto>();
 			
 			for (Job job : jobs) {
