@@ -27,14 +27,14 @@ import kodlamaio.hrms.entities.concretes.Image;
 @RestController
 @RequestMapping("/cloudinary")
 @CrossOrigin
-public class MainController {
+public class ImagesController {
 
 	
 	CloudinaryService cloudinaryService;	
 	ImageService imageService;
 	
 	@Autowired
-	public MainController(CloudinaryService cloudinaryService, ImageService imageService) {
+	public ImagesController(CloudinaryService cloudinaryService, ImageService imageService) {
 		super();
 		this.cloudinaryService = cloudinaryService;
 		this.imageService = imageService;
