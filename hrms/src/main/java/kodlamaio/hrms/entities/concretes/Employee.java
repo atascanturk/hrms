@@ -1,16 +1,21 @@
 package kodlamaio.hrms.entities.concretes;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="employees")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","images"})
 public class Employee extends User {
 
 	@Id
@@ -71,6 +76,9 @@ public class Employee extends User {
 	
 	@Column(name="known_technology")
 	private String knownTechnology;
+	
+	@OneToMany(mappedBy = "employee")
+	private List<Image> images ;
 
 	public Employee() {
 		super();
@@ -80,7 +88,7 @@ public class Employee extends User {
 			int userType, int userId, String university, LocalDate startingYearOfUniversity,
 			LocalDate graduationYearOfUniversity, String jobExperience, LocalDate experienceStartingDate,
 			LocalDate experienceEndDate, String knownLanguage, String imageName, String githubLink, String linkedInLink,
-			String coverLetter, String knownTechnology) {
+			String coverLetter, String knownTechnology,List<Image> images) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -101,6 +109,7 @@ public class Employee extends User {
 		this.linkedInLink = linkedInLink;
 		this.coverLetter = coverLetter;
 		this.knownTechnology = knownTechnology;
+		this.images=images;
 	}
 
 	public int getId() {
@@ -253,6 +262,14 @@ public class Employee extends User {
 
 	public void setKnownTechnology(String knownTechnology) {
 		this.knownTechnology = knownTechnology;
+	}
+
+	public List<Image> getImages() {
+		return images;
+	}
+
+	public void setImages(List<Image> images) {
+		this.images = images;
 	}
 	
 	
