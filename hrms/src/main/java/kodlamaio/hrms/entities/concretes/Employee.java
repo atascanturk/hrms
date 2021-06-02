@@ -13,9 +13,16 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+
+import kodlamaio.hrms.entities.concretes.cvInfos.CoverLetter;
+import kodlamaio.hrms.entities.concretes.cvInfos.Education;
+import kodlamaio.hrms.entities.concretes.cvInfos.Language;
+import kodlamaio.hrms.entities.concretes.cvInfos.ProfileLink;
+import kodlamaio.hrms.entities.concretes.cvInfos.WorkExperience;
+
 @Entity
 @Table(name="employees")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","images"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","images","cvs"})
 public class Employee extends User {
 
 	@Id
@@ -40,55 +47,16 @@ public class Employee extends User {
 
 	@Column(name="user_id")
 	private int userId;
-	
-	@Column(name="university")
-	private String university;
-	
-	@Column(name="starting_year_of_university")
-	private LocalDate startingYearOfUniversity;
-	
-	@Column(name="graduation_year_of_university")
-	private LocalDate graduationYearOfUniversity;
-	
-	@Column(name="job_experience")
-	private String jobExperience;
-	
-	@Column(name="experience_starting_date")
-	private LocalDate experienceStartingDate;
-	
-	@Column(name="experience_end_date")
-	private LocalDate experienceEndDate;
-	
-	@Column(name="known_language")
-	private String knownLanguage;
-	
-	@Column(name="image_name")
-	private String imageName;
-	
-	@Column(name="github_link")
-	private String githubLink;
-	
-	@Column(name="linkedin_link")
-	private String linkedInLink;
-	
-	@Column(name="cover_letter")
-	private String coverLetter;
-	
-	@Column(name="known_technology")
-	private String knownTechnology;
-	
-	@OneToMany(mappedBy = "employee")
-	private List<Image> images ;
+
 
 	public Employee() {
 		super();
 	}
 
+
+
 	public Employee(int id, String firstName, String lastName, String identityNumber, LocalDate dateOfBirth,
-			int userType, int userId, String university, LocalDate startingYearOfUniversity,
-			LocalDate graduationYearOfUniversity, String jobExperience, LocalDate experienceStartingDate,
-			LocalDate experienceEndDate, String knownLanguage, String imageName, String githubLink, String linkedInLink,
-			String coverLetter, String knownTechnology,List<Image> images) {
+			int userType, int userId) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -97,20 +65,10 @@ public class Employee extends User {
 		this.dateOfBirth = dateOfBirth;
 		this.userType = userType;
 		this.userId = userId;
-		this.university = university;
-		this.startingYearOfUniversity = startingYearOfUniversity;
-		this.graduationYearOfUniversity = graduationYearOfUniversity;
-		this.jobExperience = jobExperience;
-		this.experienceStartingDate = experienceStartingDate;
-		this.experienceEndDate = experienceEndDate;
-		this.knownLanguage = knownLanguage;
-		this.imageName = imageName;
-		this.githubLink = githubLink;
-		this.linkedInLink = linkedInLink;
-		this.coverLetter = coverLetter;
-		this.knownTechnology = knownTechnology;
-		this.images=images;
+	
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -168,109 +126,9 @@ public class Employee extends User {
 		this.userId = userId;
 	}
 
-	public String getUniversity() {
-		return university;
-	}
 
-	public void setUniversity(String university) {
-		this.university = university;
-	}
 
-	public LocalDate getStartingYearOfUniversity() {
-		return startingYearOfUniversity;
-	}
 
-	public void setStartingYearOfUniversity(LocalDate startingYearOfUniversity) {
-		this.startingYearOfUniversity = startingYearOfUniversity;
-	}
-
-	public LocalDate getGraduationYearOfUniversity() {
-		return graduationYearOfUniversity;
-	}
-
-	public void setGraduationYearOfUniversity(LocalDate graduationYearOfUniversity) {
-		this.graduationYearOfUniversity = graduationYearOfUniversity;
-	}
-
-	public String getJobExperience() {
-		return jobExperience;
-	}
-
-	public void setJobExperience(String jobExperience) {
-		this.jobExperience = jobExperience;
-	}
-
-	public LocalDate getExperienceStartingDate() {
-		return experienceStartingDate;
-	}
-
-	public void setExperienceStartingDate(LocalDate experienceStartingDate) {
-		this.experienceStartingDate = experienceStartingDate;
-	}
-
-	public LocalDate getExperienceEndDate() {
-		return experienceEndDate;
-	}
-
-	public void setExperienceEndDate(LocalDate experienceEndDate) {
-		this.experienceEndDate = experienceEndDate;
-	}
-
-	public String getKnownLanguage() {
-		return knownLanguage;
-	}
-
-	public void setKnownLanguage(String knownLanguage) {
-		this.knownLanguage = knownLanguage;
-	}
-
-	public String getImageName() {
-		return imageName;
-	}
-
-	public void setImageName(String imageName) {
-		this.imageName = imageName;
-	}
-
-	public String getGithubLink() {
-		return githubLink;
-	}
-
-	public void setGithubLink(String githubLink) {
-		this.githubLink = githubLink;
-	}
-
-	public String getLinkedInLink() {
-		return linkedInLink;
-	}
-
-	public void setLinkedInLink(String linkedInLink) {
-		this.linkedInLink = linkedInLink;
-	}
-
-	public String getCoverLetter() {
-		return coverLetter;
-	}
-
-	public void setCoverLetter(String coverLetter) {
-		this.coverLetter = coverLetter;
-	}
-
-	public String getKnownTechnology() {
-		return knownTechnology;
-	}
-
-	public void setKnownTechnology(String knownTechnology) {
-		this.knownTechnology = knownTechnology;
-	}
-
-	public List<Image> getImages() {
-		return images;
-	}
-
-	public void setImages(List<Image> images) {
-		this.images = images;
-	}
 	
 	
 

@@ -9,13 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+
+
 @Entity
 @Table(name="images")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","employee"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","employee","cvs"})
 public class Image {
 
 	@Id
@@ -35,6 +38,9 @@ public class Image {
 	@ManyToOne()
 	@JoinColumn(name="employee_id")
 	private Employee employee;
+	
+	@OneToMany(mappedBy = "image")
+	private List<Cv> cvs ;
 
 	public Image() {
 		super();
@@ -87,7 +93,13 @@ public class Image {
 		this.employee = employee;
 	}
 
+	public List<Cv> getCvs() {
+		return cvs;
+	}
 
+	public void setCvs(List<Cv> cvs) {
+		this.cvs = cvs;
+	}
 
 	
 	

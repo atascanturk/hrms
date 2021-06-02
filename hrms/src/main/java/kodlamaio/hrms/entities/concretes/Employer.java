@@ -39,7 +39,8 @@ public class Employer extends User {
 	private String phoneNumber;
 	
 	@OneToMany(mappedBy = "employer")
-	private List<Job> jobs;
+	private List<Job> jobs;	
+	
 
 	public Employer() {
 		super();
